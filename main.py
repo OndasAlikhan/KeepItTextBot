@@ -74,6 +74,7 @@ async def transcribe_video_note(update: Update, context: ContextTypes.DEFAULT_TY
     """Handle video notes (round video messages) and transcribe their audio."""
     status_msg = None
     video_path = ""
+    wav_path = ""
     try:
         # Get the video note
         video_note = update.message.video_note
@@ -100,6 +101,7 @@ async def transcribe_video_note(update: Update, context: ContextTypes.DEFAULT_TY
 
         # Delete the temporary file
         os.remove(video_path)
+        os.remove(wav_path)
 
         # Format the response
         user = update.message.from_user
@@ -119,6 +121,9 @@ async def transcribe_video_note(update: Update, context: ContextTypes.DEFAULT_TY
         # Clean up file if it exists
         if video_path and os.path.exists(video_path):
             os.remove(video_path)
+        if wav_path and os.path.exists(wav_path):
+            os.remove(wav_path)
+
 
 
 # async def text_response(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
