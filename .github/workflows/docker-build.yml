@@ -17,6 +17,17 @@ jobs:
       packages: write
 
     steps:
+      - name: Generate version if not provided
+        id: version
+        run: |
+          if [ -z "${{ inputs.version }}" ]; then
+            VERSION=$(date +"%Y%m%d-%H%M%S")
+          else
+            VERSION="${{ inputs.version }}"
+          fi
+          echo "version=${VERSION}" >> $GITHUB_OUTPUT
+          echo "Using version: ${VERSION}"
+
       - name: Checkout repository
         uses: actions/checkout@v4
 
