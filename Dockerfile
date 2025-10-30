@@ -30,3 +30,5 @@ USER appuser
 
 # Run the application
 CMD ["python", "main.py"]
+
+EXPOSE 80

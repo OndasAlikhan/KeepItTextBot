@@ -144,8 +144,7 @@ def main() -> None:
 
     # Start the bot
     logger.info("Bot started. Listening for voice messages...")
-    application.run_polling(allowed_updates=Update.ALL_TYPES)
-
+    application.run_webhook(allowed_updates=Update.ALL_TYPES)
 
 if __name__ == '__main__':
     main()
