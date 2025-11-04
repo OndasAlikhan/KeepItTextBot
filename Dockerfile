@@ -1,34 +1,30 @@
-# Use official Python runtime as base image
+# Use an official Python runtime as a parent image
 FROM python:3.11-slim
 
-# Set working directory
-WORKDIR /app
-
 # Set environment variables
-ENV PYTHONDONTWRITEBYTECODE=1 \
-    PYTHONUNBUFFERED=1 \
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
     PIP_NO_CACHE_DIR=1 \
     PIP_DISABLE_PIP_VERSION_CHECK=1
 
-# Copy requirements file if it exists
-COPY requirements.txt* ./
+# Set work directory
+WORKDIR /app
 
-# Install dependencies if requirements.txt exists
-RUN if [ -f requirements.txt ]; then \
-    pip install --no-cache-dir -r requirements.txt; \
-    fi
+# Copy requirements file
+COPY requirements.txt .
 
-# Copy application code
-COPY main.py .
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Create non-root user for security
-RUN useradd -m -u 1000 appuser && \
-    chown -R appuser:appuser /app
+# Copy project files
+COPY . .
 
-# Switch to non-root user
+# Create a non-root user and switch to it
+RUN useradd -m -u 1000 appuser && chown -R appuser:appuser /app
 USER appuser
+
+# Expose port (adjust as needed)
+EXPOSE 8080
 
 # Run the application
 CMD ["python", "main.py"]
-
-EXPOSE 80
