@@ -16,6 +16,9 @@ COPY requirements.txt .
 # Install Python dependencies
 RUN pip install --no-cache-dir -r requirements.txt
 
+# Pre-download the Hugging Face model during build
+RUN python -c "from transformers import pipeline; pipeline('automatic-speech-recognition', model='openai/whisper-small', device=-1, return_timestamps=True)"
+
 # Copy project files
 COPY . .
 
