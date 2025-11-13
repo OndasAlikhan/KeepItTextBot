@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 
 # Configuration
 TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
-SERVICE_URL = os.getenv('SERVICE_URL')
+WEBHOOK_URL = os.getenv('WEBHOOK_URL')
 
 pipe = pipeline(
     "automatic-speech-recognition",
@@ -145,7 +145,7 @@ def main() -> None:
 
     # Start the bot
     logger.info("Bot started. Listening for voice messages...")
-    application.run_webhook(port=8080, allowed_updates=Update.ALL_TYPES, webhook_url=SERVICE_URL)
+    application.run_webhook(port=8080, allowed_updates=Update.ALL_TYPES, webhook_url=WEBHOOK_URL)
 
 if __name__ == '__main__':
     main()
