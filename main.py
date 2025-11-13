@@ -145,7 +145,7 @@ def main() -> None:
 
     # Start the bot
     logger.info("Bot started. Listening for voice messages...")
-    application.run_webhook(port=8080, allowed_updates=Update.ALL_TYPES, webhook_url=WEBHOOK_URL)
+    application.run_webhook(port=80, allowed_updates=Update.ALL_TYPES, webhook_url=WEBHOOK_URL)
 
 if __name__ == '__main__':
     main()
