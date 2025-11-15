@@ -17,7 +17,10 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Pre-download the Hugging Face model during build
-RUN python -c "from transformers import pipeline; pipeline('automatic-speech-recognition', model='openai/whisper-small', device=-1, return_timestamps=True)"
+RUN python -c "from transformers import AutoModel, AutoTokenizer; \
+    model_name='openai/whisper-small'; \
+    AutoModel.from_pretrained(model_name); \
+    AutoTokenizer.from_pretrained(model_name)"
 
 # Copy project files
 COPY . .
