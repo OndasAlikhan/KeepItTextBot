@@ -34,6 +34,9 @@ COPY . .
 RUN useradd -m -u 1000 appuser && chown -R appuser:appuser /app
 USER appuser
 
+# Verify ffmpeg is accessible
+RUN ffmpeg -version
+
 # Expose port (adjust as needed)
 EXPOSE 8080
 
