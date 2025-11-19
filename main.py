@@ -25,7 +25,7 @@ device = "cuda:0" if torch.cuda.is_available() else "cpu"
 
 pipe = pipeline(
     "automatic-speech-recognition",
-    model="flamme-vrm/KazSTT",
+    model="openai/whisper-small",
     device=device,
     return_timestamps=True,
 )

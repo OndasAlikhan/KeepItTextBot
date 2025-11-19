@@ -23,7 +23,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Pre-download the Hugging Face model during build
 RUN python -c "from transformers import AutoModel, AutoTokenizer; \
-    model_name='flamme-vrm/KazSTT'; \
+    model_name='openai/whisper-small'; \
     AutoModel.from_pretrained(model_name); \
     AutoTokenizer.from_pretrained(model_name)"
 
