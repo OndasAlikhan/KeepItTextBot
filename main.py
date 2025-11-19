@@ -5,6 +5,7 @@ from telegram.ext import Application, MessageHandler, filters, ContextTypes, Cha
 from dotenv import load_dotenv
 from transformers import pipeline
 import ffmpeg
+import torch
 
 load_dotenv()
 
@@ -20,10 +21,12 @@ TELEGRAM_BOT_TOKEN = os.getenv('TELEGRAM_BOT_TOKEN')
 WEBHOOK_URL = os.getenv('WEBHOOK_URL')
 PORT = os.getenv('PORT')
 
+device = "cuda:0" if torch.cuda.is_available() else "cpu"
+
 pipe = pipeline(
     "automatic-speech-recognition",
-    model="openai/whisper-small",
-    device=-1,
+    model="flamme-vrm/KazSTT",
+    device=device,
     return_timestamps=True,
 )
 
